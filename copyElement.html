@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("ul li").click(function () {
+                /**
+                * （1）这个例子中 clone , clone(true)的区别在于，clone(ture)除了克隆集合，还会克隆click句柄
+
+                （2）现象就是：clone的 Clone Me! 无法继续点击克隆。但是clone(true)出来的 Clone Me! 可以继续克隆，和原本按钮没有区别。
+
+                如上是ITeye中的经验，今天确实深刻感悟了一番。差点儿又写出了一大堆冗余代码。
+                需要实现的效果是id="more_list"下的a单击后，将a克隆并添加到<li class="more_box"></li>之中。
+                [html] view plain copy
+                <span style="font-size:18px;">$("#more_list>a").click(function(){
+                $(".more_box").html($(this).clone(true)).show().click();
+                })</span>
+
+                结果确实实现了克隆，但li元素本身的click事件怎么也运行不了了。(以上述原理，当clone(true)时，
+                 将a的click事件也复制过去了，所以li单击时触发的是a的click的事件，原本的事件被覆盖)
+                于是乎找了一下午原因终于发现了。
+
+                去掉clone(true),中的true即可（只克隆元素，不克隆事件）。
+                [html] view plain copy
+                <span style="font-size:18px;">$("#more_list>a").click(function(){
+                $(".more_box").html($(this).clone()).show().click();
+                })</span>
+
+                */
+                $(this).clone(true).appendTo("ul");
+            });
+        });
+    </script>
+    <title>超实用的jQuery代码段</title>
+</head>
+<body>
+<h2>超实用的jQuery代码段 - jQuery复制节点元素的方法</h2>
+<p>您好！您最喜欢的IT公司是：</p>
+<ul>
+    <li title="Google">Google</li>
+    <li title="Apple">Apple</li>
+    <li title="Microsoft">Microsoft</li>
+</ul>
+</body>
+</html>
