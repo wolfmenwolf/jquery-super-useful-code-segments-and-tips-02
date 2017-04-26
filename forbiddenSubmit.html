@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../jquery/jquery-1.9.1.min.js"></script>
+    <script src="../jquery/js/jquery-ui-1.10.3.custom.js"></script>
+    <link href="../jquery/css/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="../jquery/themes/base/jquery.ui.all.css">
+    <script src="../jquery/ui/jquery.ui.core.js"></script>
+    <script src="../jquery/ui/jquery.ui.widget.js"></script>
+    <script src="../jquery/ui/jquery.ui.position.js"></script>
+    <script src="../jquery/ui/jquery.ui.menu.js"></script>
+    <script src="../jquery/ui/jquery.ui.autocomplete.js"></script>
+    <link rel="stylesheet" href="css/demos.css">
+    <script type="text/javascript">
+        /**
+         * escape() 函数可对字符串进行编码，这样就可以在所有的计算机上读取该字符串。
+         * 返回值
+         * 已编码的 string 的副本。其中某些字符被替换成了十六进制的转义序列。
+         * 说明
+         * 该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： * @ - _ + . / 。其他所有的字符都会被转义序列替换。
+         *
+         *
+         * unescape() 函数可对通过 escape() 编码的字符串进行解码。
+         * 返回值
+         * string 被解码后的一个副本。
+         * 说明
+         * 该函数的工作原理是这样的：通过找到形式为 %xx 和 %uxxxx 的字符序列（x 表示十六进制的数字），
+         * 用 Unicode 字符 \u00xx 和 \uxxxx 替换这样的字符序列进行解码。
+         */
+        $(document).ready(function () {
+            $("#id-submit").click(function () {
+                $("#id-submit").attr("disabled","disabled");
+                $.ajax({
+                   type:'POST',
+                    url:'forbiddenSubmit.php',
+                    data:{name:escape("username")},
+                    //dataType:'text',
+                    success:function (data,status) {
+                        $("#id-submit").removeAttr("disabled");
+                        alert(unescape(data));
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    <style type="text/css">
+        body {
+            font:62.5% "Trebuchet MS", sans-serif;
+            margin:64px;
+        }
+        #h2-caption {
+            font:20px "Trebuchet MS", sans-serif;
+        }
+        p {
+            font:16px "Trebuchet MS", sans-serif;
+        }
+        .demoHeaders {
+            margin-top:2em;
+        }
+        form {
+            font:16px "Trebuchet MS", sans-serif;
+        }
+        #div-log {
+            font:13.5px "Trebuchet MS", sans-serif;
+        }
+    </style>
+    <title>超实用的jQuery代码段</title>
+</head>
+<body>
+<h2 id="h2-caption">超实用的jQuery代码段 - jQuery防止单个页面重复提交按钮方法</h2>
+<hr><br>
+<form>
+    Name:<input type="text" name="name" id="name"/>
+    <input type="submit" name="name-submit" id="id-submit"/>
+</form>
+<br><hr>
+<div id="div-log">
+    <p>日志记录：</p>
+</div>
+</body>
+</html>
