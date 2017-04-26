@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+     <script language="javascript">
+                function test()
+                {
+                    var rng=document.body.createTextRange();
+                    alert(rng.text)
+                }
+        function test1()
+        {
+            var rng=document.body.createTextRange();
+            alert(rng.htmlText)
+        }
+    </script>
+
+
+</head>
+<body>
+<input type="button" onclick="test()" value="text">
+        <input type="button" onclick="test1()" value="htmlText">
+</body>
+</html>
